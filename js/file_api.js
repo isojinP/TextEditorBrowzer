@@ -26,14 +26,16 @@ window.addEventListener('DOMContentLoaded', function() {
 	// 「txt save」クリック(「.txt」形式で保存)
 	document.getElementById('txt_design').addEventListener('click', function(e) {
 		saveFile("downloader", filename+".txt", document.getElementById('contents').innerHTML);
-		var downloader = document.getElementById('downloader');
-		downloader.onclick();
+			$("#downloader")[0].click();
+//		var downloader = document.getElementById('downloader');
+//		downloader.onclick();
 	});
 	// 「html save」クリック(「.html」形式で保存)
 	document.getElementById('html_design').addEventListener('click', function(e) {
 		saveFile("downloader", filename+".html", document.getElementById('contents').innerHTML);
-		var downloader = document.getElementById('downloader');
-		downloader.onclick();
+			$("#downloader")[0].click();
+//		var downloader = document.getElementById('downloader');
+//		downloader.onclick();
 	});
 
 });
@@ -74,10 +76,12 @@ function saveFile(id, name, content) {
  
  // Aタグのhref属性にBlobオブジェクトを設定し、リンクを生成
     window.URL = window.URL || window.webkitURL;
-//	document.getElementById(id).setAttribute("href", window.URL.createObjectURL(blob));
-	location.href = window.URL.createObjectURL(blob);
-//	document.getElementById(id).setAttribute("download", name);
+	document.getElementById(id).setAttribute("href", window.URL.createObjectURL(blob));
+	document.getElementById(id).setAttribute("download", name);
+
+//	location.href = document.getElementById(id).getAttribute("href");
 
 //	console.log(filename);
 //	console.log(name);
 }
+
