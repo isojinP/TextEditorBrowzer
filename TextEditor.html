@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>TextEditor</title>
+<link rel="stylesheet" href="./css/reset.css">
+<link rel="stylesheet" href="./css/file.css">
+<script	src="https://code.jquery.com/jquery-2.2.4.js"
+			integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+			crossorigin="anonymous"></script>
+<script	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+			integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+			crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="controller">
+	<input type="file" class="file" id="file" name="file" />
+	<input type="button" class="save" id="txt" value="txt save" />
+	<input type="button" class="save" id="html" value="html save" />
+	<input type="button" class="file" id="cancel" value="edit cancel" />
+</div>
+
+<div id="selecter">
+	<label for="file" id="selecter_file">
+		<h1>編集するファイルを選択して下さい</h1>
+	</label>
+</div>
+
+<div id="editor">
+	<div id="contents" contenteditable="true">
+	</div>
+
+	<hr />
+
+	<div class="editor_design">
+		<label for="txt" class="save_design" id="txt_design">
+			txt save
+		</label>
+		<label for="html" class="save_design" id="html_design">
+			html save
+		</label>
+		<label for="cancel" class="file_design" id="cancel_design">
+			edit cancel
+		</label>
+		<label for="file" class="file_design" id="change_design">
+			file change
+		</label>
+	</div>
+
+</div>
+
+<script type="text/javascript" charset="utf-8" src="./js/file_api.js"></script>
+</body>
+</html>
+
