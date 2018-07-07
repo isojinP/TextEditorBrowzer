@@ -33,6 +33,10 @@ window.addEventListener('DOMContentLoaded', function() {
 		saveFile("downloader", filename+".html", document.getElementById('contents').innerHTML);
 			$("#downloader")[0].click();
 	});
+	// 「reload」クリック(現在の編集内容を「HTML」形式に変換して再表示)
+	document.getElementById('reload_design').addEventListener('click', function(e) {
+		document.getElementById('contents').innerHTML = EscapeUnlimite(document.getElementById('contents').innerHTML);
+	});
 
 });
 
@@ -67,12 +71,18 @@ function mode_changer(mode){
 }
 
 function saveFile(id, name, content) {
- // 指定されたデータを保持するBlobを作成する。
+	// 指定されたデータを保持するBlobを作成する。
+	content = EscapeUnlimite(content);
     var blob = new Blob([ content ], { "type" : "application/x-msdownload" });
- 
- // Aタグのhref属性にBlobオブジェクトを設定し、リンクを生成
+	// Aタグのhref属性にBlobオブジェクトを設定し、リンクを生成
     window.URL = window.URL || window.webkitURL;
 	document.getElementById(id).setAttribute("href", window.URL.createObjectURL(blob));
 	document.getElementById(id).setAttribute("download", name);
 }
 
+function EscapeUnlimite(str) {
+	str = str.replace(/(&lt;)/g,'<');
+	str = str.replace(/(&gt;)/g,'>');
+
+	return str;
+}
