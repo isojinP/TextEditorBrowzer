@@ -1,6 +1,7 @@
 var input;
 var reader;
 var output;
+var filename = "";
 
 window.addEventListener('DOMContentLoaded', function() {
 	// ページ読み込み時(一度、ファイルの選択を初期化)
@@ -17,9 +18,22 @@ window.addEventListener('DOMContentLoaded', function() {
 		}
 	}, true);
 
-	// 編集中止
+	// 「edit cancel」クリック(編集中止)
 	document.getElementById('cancel').addEventListener('click', function(e) {
 		mode_changer(0);
+	});
+
+	// 「txt save」クリック(「.txt」形式で保存)
+	document.getElementById('txt_design').addEventListener('click', function(e) {
+		saveFile("downloader", filename+".txt", document.getElementById('contents').innerHTML);
+		var downloader = document.getElementById('downloader');
+		downloader.onclick();
+	});
+	// 「html save」クリック(「.html」形式で保存)
+	document.getElementById('html_design').addEventListener('click', function(e) {
+		saveFile("downloader", filename+".html", document.getElementById('contents').innerHTML);
+		var downloader = document.getElementById('downloader');
+		downloader.onclick();
 	});
 
 });
@@ -32,6 +46,7 @@ function mode_changer(mode){
 		document.getElementById('editor').style.display = "none";
 		document.title = "TextEditor";
 		edit_file = null;		
+		filename = "";
 	}else{			//File editor mode
 		edit_file = input;
 		reader = new FileReader();
@@ -46,8 +61,23 @@ function mode_changer(mode){
 			document.getElementById('selecter').style.display = "none";
 			document.getElementById('editor').style.display = "contents";
 			document.title = edit_file.name;
+			var n = edit_file.name.lastIndexOf(".");
+			filename = n > -1 ? edit_file.name.substr(0, n) : edit_file.name;
 		}
 	}
 }
 
+function saveFile(id, name, content) {
 
+ // 指定されたデータを保持するBlobを作成する。
+    var blob = new Blob([ content ], { "type" : "application/x-msdownload" });
+ 
+ // Aタグのhref属性にBlobオブジェクトを設定し、リンクを生成
+    window.URL = window.URL || window.webkitURL;
+//	document.getElementById(id).setAttribute("href", window.URL.createObjectURL(blob));
+	location.href = window.URL.createObjectURL(blob);
+//	document.getElementById(id).setAttribute("download", name);
+
+//	console.log(filename);
+//	console.log(name);
+}
