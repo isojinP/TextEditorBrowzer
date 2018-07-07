@@ -25,17 +25,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	// 「txt save」クリック(「.txt」形式で保存)
 	document.getElementById('txt_design').addEventListener('click', function(e) {
-		saveFile("downloader", filename+".txt", document.getElementById('contents').innerHTML);
+		saveFile("downloader", filename+".txt", document.getElementById('contents').innerHTML.replace(/(<br>)/g, '\r\n'));
 			$("#downloader")[0].click();
-//		var downloader = document.getElementById('downloader');
-//		downloader.onclick();
 	});
 	// 「html save」クリック(「.html」形式で保存)
 	document.getElementById('html_design').addEventListener('click', function(e) {
 		saveFile("downloader", filename+".html", document.getElementById('contents').innerHTML);
 			$("#downloader")[0].click();
-//		var downloader = document.getElementById('downloader');
-//		downloader.onclick();
 	});
 
 });
@@ -54,7 +50,8 @@ function mode_changer(mode){
 		reader = new FileReader();
 		// ファイル読み込み成功時、内容を<div id="contents">へ出力
 			reader.addEventListener('load', function(e) {
-			output = reader.result.replace(/(\n|\r)/g, '<br />');
+			output = reader.result.replace(/(\r\n)/g, '<br>');
+			output = output.replace(/(\n|\r)/g, '<br>');
 			document.getElementById('contents').innerHTML = output;
 		}, true);
 		reader.readAsText(edit_file, 'UTF-8');
@@ -70,7 +67,6 @@ function mode_changer(mode){
 }
 
 function saveFile(id, name, content) {
-
  // 指定されたデータを保持するBlobを作成する。
     var blob = new Blob([ content ], { "type" : "application/x-msdownload" });
  
@@ -78,10 +74,5 @@ function saveFile(id, name, content) {
     window.URL = window.URL || window.webkitURL;
 	document.getElementById(id).setAttribute("href", window.URL.createObjectURL(blob));
 	document.getElementById(id).setAttribute("download", name);
-
-//	location.href = document.getElementById(id).getAttribute("href");
-
-//	console.log(filename);
-//	console.log(name);
 }
 
