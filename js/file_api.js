@@ -2,6 +2,7 @@ var input;
 var reader;
 var output;
 var filename = "";
+var fontMode = 0;
 
 window.addEventListener('DOMContentLoaded', function() {
 	// ページ読み込み時(一度、ファイルの選択を初期化)
@@ -36,6 +37,12 @@ window.addEventListener('DOMContentLoaded', function() {
 	// 「reload」クリック(現在の編集内容を「HTML」形式に変換して再表示)
 	document.getElementById('reload_design').addEventListener('click', function(e) {
 		document.getElementById('contents').innerHTML = EscapeUnlimite(document.getElementById('contents').innerHTML);
+	});
+
+	// 「font color」クリック(編集画面のフォント色と背景色のパターンを切り替える)
+	document.getElementById('color_design').addEventListener('click', function(e) {
+		fontMode = (fontMode + 1) % 4;
+		fontColor(fontMode);
 	});
 
 });
@@ -89,4 +96,28 @@ function EscapeUnlimite(str) {
 	str = str.replace(/(&apos;)/g,"'");
 
 	return str;
+}
+
+function fontColor(mode) {
+	if(mode%4 == 0){
+		document.body.style.backgroundColor = "#ffffff";
+		document.body.style.color = "#000000";
+
+		document.getElementById('img_font_color').setAttribute("src","./icon/font_black.png");
+	}else if(mode%4 == 1){
+		document.body.style.backgroundColor = "#000000";
+		document.body.style.color = "#ffffff";
+
+		document.getElementById('img_font_color').setAttribute("src","./icon/font_white.png");
+	}else if(mode%4 == 2){
+		document.body.style.backgroundColor = "#1d543f";
+		document.body.style.color = "#d0ff92";
+
+		document.getElementById('img_font_color').setAttribute("src","./icon/font_green.png");
+	}else{
+		document.body.style.backgroundColor = "#d0ff92";
+		document.body.style.color = "#1d543f";
+
+		document.getElementById('img_font_color').setAttribute("src","./icon/font_yellow.png");
+	}
 }
