@@ -83,6 +83,10 @@ function saveFile(id, name, content) {
 function EscapeUnlimite(str) {
 	str = str.replace(/(&lt;)/g,'<');
 	str = str.replace(/(&gt;)/g,'>');
+	str = str.replace(/(&quot;)/g,'"');
+	str = str.replace(/(&amp;)/g,'&');
+	str = str.replace(/(&nbsp;)/g,' ');
+	str = str.replace(/(&apos;)/g,"'");
 
 	return str;
 }
