@@ -19,6 +19,11 @@ window.addEventListener('DOMContentLoaded', function() {
 		}
 	}, true);
 
+	// 「new file」クリック(新規作成)
+	document.getElementById('new').addEventListener('click', function(e) {
+		mode_changer(2);
+	});
+
 	// 「edit cancel」クリック(編集中止)
 	document.getElementById('cancel').addEventListener('click', function(e) {
 		mode_changer(0);
@@ -57,22 +62,29 @@ function mode_changer(mode){
 		edit_file = null;		
 		filename = "";
 	}else{			//File editor mode
-		edit_file = input;
-		reader = new FileReader();
-		// ファイル読み込み成功時、内容を<div id="contents">へ出力
+		if(mode == 1){
+			edit_file = input;
+			reader = new FileReader();
+			// ファイル読み込み成功時、内容を<div id="contents">へ出力
 			reader.addEventListener('load', function(e) {
-			output = reader.result.replace(/(\r\n)/g, '<br>');
-			output = output.replace(/(\n|\r)/g, '<br>');
-			document.getElementById('contents').innerHTML = output;
-		}, true);
-		reader.readAsText(edit_file, 'UTF-8');
-		// 編集モードとしてページを更新
-		reader.onload = function(event) {
-			document.getElementById('selecter').style.display = "none";
-			document.getElementById('editor').style.display = "contents";
-			document.title = edit_file.name;
-			var n = edit_file.name.lastIndexOf(".");
-			filename = n > -1 ? edit_file.name.substr(0, n) : edit_file.name;
+				output = reader.result.replace(/(\r\n)/g, '<br>');
+				output = output.replace(/(\n|\r)/g, '<br>');
+				document.getElementById('contents').innerHTML = output;
+			}, true);
+			reader.readAsText(edit_file, 'UTF-8');
+			// 編集モードとしてページを更新
+			reader.onload = function(event) {
+				document.getElementById('selecter').style.display = "none";
+				document.getElementById('editor').style.display = "contents";
+				document.title = edit_file.name;
+				var n = edit_file.name.lastIndexOf(".");
+				filename = n > -1 ? edit_file.name.substr(0, n) : edit_file.name;
+			}
+		} else {
+				document.getElementById('selecter').style.display = "none";
+				document.getElementById('editor').style.display = "contents";
+				document.title = "New File";
+				filename = "Undefined";
 		}
 	}
 }
@@ -121,3 +133,4 @@ function fontColor(mode) {
 		document.getElementById('img_font_color').setAttribute("src","./icon/font_yellow.png");
 	}
 }
+

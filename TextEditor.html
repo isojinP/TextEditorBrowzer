@@ -17,11 +17,13 @@
 
 <div class="controller">
 	<input type="file" class="file" id="file" name="file" />
+	<input type="button" class="file" id="new" value="new file" />
 	<input type="button" class="file" id="cancel" value="edit cancel" />
 	<input type="button" class="save" id="txt" value="txt save" target="_blank" />
 	<input type="button" class="save" id="html" value="html save" target="_blank" />
 	<input type="button" class="view" id="reload" value="reload" />
 	<input type="button" class="view" id="color" value="font color" />
+	<input type="file" class="view" id="bg_img" name="bg_img" />
 
 	<a href="" download="" id="downloader" target="_blank" ></a>
 </div>
@@ -30,6 +32,9 @@
 		<h1>編集するファイルを選択して下さい</h1>
 	<label for="file" id="selecter_file">
 		<img src="./icon/file_dir.png" class="btn_icon">
+	</label>
+	<label for="new" id="selecter_new">
+		<img src="./icon/new-document.png" class="btn_icon">
 	</label>
 </div>
 
@@ -57,6 +62,9 @@
 		</label>
 		<label for="color" class="view_design" id="color_design">
 			<img src="./icon/font_black.png" id="img_font_color" class="btn_icon">
+		</label>
+		<label for="bg_img" class="view_design" id="bg_design">
+			<img src="./icon/file_dir.png" class="btn_icon">
 		</label>
 	</div>
 

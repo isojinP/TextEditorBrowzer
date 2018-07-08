@@ -22,22 +22,26 @@ h1 {
 	margin	:	25px;
 }
 
+#contents {
+	min-height: 300px;
+}
+
 label {
 	background-color: #f0f0f0;
 	color: white;
-	border: 15px solid #e8eded;
+	border: 8px solid #e8eded;
 	border-radius: 5em;
 	padding: 12px 9px;
 	display: inline-block;
 }
 .btn_icon {
-	width	:	64px;
-	height	:	64px;
+	width	:	48px;
+	height	:	48px;
 	margin	:	5px;
 }
 
 #color_design {
-	font-size:	24px;
+	font-size:	20px;
 	color: black;
 }
 
